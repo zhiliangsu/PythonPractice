@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     # MyApps
     'learning_logs',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -124,3 +125,6 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# MySettings
+LOGIN_URL = '/users/login/'

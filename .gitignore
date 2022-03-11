@@ -6,3 +6,5 @@ learning_env/
 006_learning_log/learning_log/__pycache__/
 006_learning_log/learning_logs/__pycache__/
 006_learning_log/learning_logs/migrations/__pycache__/
+006_learning_log/users/__pycache__/
+006_learning_log/users/migrations/__pycache__/
