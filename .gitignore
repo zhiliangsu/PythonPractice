@@ -1,10 +1,12 @@
 learning_env/
-002_alien_invasion_v1/__pycache__/
-003_alien_invasion_v2/__pycache__/
-004_alien_invasion_v3/__pycache__/
-005_data_visualization_v1/__pycache__/
-006_learning_log/learning_log/__pycache__/
-006_learning_log/learning_logs/__pycache__/
-006_learning_log/learning_logs/migrations/__pycache__/
-006_learning_log/users/__pycache__/
-006_learning_log/users/migrations/__pycache__/
+__pycache__/
+*.sqlite3
+# 002_alien_invasion_v1/__pycache__/
+# 003_alien_invasion_v2/__pycache__/
+# 004_alien_invasion_v3/__pycache__/
+# 005_data_visualization_v1/__pycache__/
+# 006_learning_log/learning_log/__pycache__/
+# 006_learning_log/learning_logs/__pycache__/
+# 006_learning_log/learning_logs/migrations/__pycache__/
+# 006_learning_log/users/__pycache__/
+# 006_learning_log/users/migrations/__pycache__/

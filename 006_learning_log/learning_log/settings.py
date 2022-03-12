@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure--_0^2xu0tso^@wulybq#_d-3^2_gabsnu4azvgqoj%863^y=+%'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost']
 
 
 # Application definition
@@ -61,7 +63,7 @@ ROOT_URLCONF = 'learning_log.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'learning_log/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -112,7 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+# TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -121,8 +124,14 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'learning_log/templates'),
+    os.path.join(BASE_DIR, 'learning_logs/templates'),
+    os.path.join(BASE_DIR, 'users/templates'),
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
@@ -136,3 +145,41 @@ LOGIN_URL = '/users/login/'
 BOOTSTRAP3 = {
     'include_jquery': True,
 }
+
+# Heroku设置
+if os.getcwd() == '/app':
+    import dj_database_url
+    DATABASES = {
+        'default': dj_database_url.config(default='postgres://localhost')
+    }
+
+    # 让request.is_secure()承认X-Forward-Proto头
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARD_PROTO', 'https')
+
+    # 支持所有的主机头（host header）
+    ALLOWED_HOSTS = ['learning-log-0824.herokuapp.com']
+
+    DEBUG = False
+
+    # 静态资产配置
+    # BASE_DIR = os.path.dirname(os.path.abspath('__file__'))
+    # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    # STATIC_URL = '/static/'
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR, 'learning_log/templates'),
+    #     os.path.join(BASE_DIR, 'learning_logs/templates'),
+    #     os.path.join(BASE_DIR, 'users/templates'),
+    # )
+
+    # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+    # # Static files (CSS, JavaScript, Images)
+    # # https://docs.djangoproject.com/en/1.9/howto/static-files/
+    # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    # STATIC_URL = '/static/'
+
+    # # Extra places for collectstatic to find static files.
+    # STATICFILES_DIRS = (
+    #     os.path.join(BASE_DIR, 'static'),
+    # )
