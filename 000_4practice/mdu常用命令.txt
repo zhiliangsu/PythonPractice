@@ -1,0 +1,24 @@
+global digitmap add service SIP name sip body 8XXXXXXXXXXX
+sipuser pstnuser add slot 1 beginindex 0 num 64 sipdigit 800100100000 digitmapname sip
+sipuser pstnuserid add slot 1 beginindex 0 num 64 useridfix 8001001000 type 3 digitlen 2 beginno 0
+sipuser user-authentication modify slot 1 beginindex 0 num 64 authusername 8
+
+sipuser pstnuser digitlen slot 1
+sipuser pstnuserid del slot 1
+tid del
+tid add timfix RTP type 3 digitlength 3 mgid 1
+end
+save
+reboot
+
+voice h248 service-control opertype 1
+voice h248 service-control opertype 2
+voice h248 service-control opertype 3
+show voice h248 h248state
+show voip license
+configure voip license H248 0 SIP 1
+configure voip license H248 1 SIP 0
+show voice h248 mg capability mgid 1
+voice h248 mg capability mgid 1 hotlinewithspace 1 -- 不带空格
+voice h248 mg capability mgid 1 hotlinewithspace 2 -- 带空格
+voice h248 mg capability mgid 1 hotlinewithspace 3 -- 带T
