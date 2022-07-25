@@ -1,5 +1,21 @@
 import socket
 import os
+import threading
+
+def download_file(client_socket, ip_port):
+
+    file_name = client_socket.recv(1024).decode()
+    print('client info: %s, filename: %s' % (ip_port, file_name))
+    if os.path.exists(file_name):
+        with open(file_name, 'rb') as file:
+            while True:
+                file_data = file.read(1024)
+                if file_data:
+                    client_socket.send(file_data)
+                else:
+                    break
+    else:
+        print('File not exists.')
 
 def create_server_socket():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -9,18 +25,9 @@ def create_server_socket():
     
     while True:
         client_socket, ip_port = server_socket.accept()
-        file_name = client_socket.recv(1024).decode()
-        print('client info: %s, filename: %s' % (ip_port, file_name))
-        if os.path.exists(file_name):
-            with open(file_name, 'rb') as file:
-                while True:
-                    file_data = file.read(1024)
-                    if file_data:
-                        client_socket.send(file_data)
-                    else:
-                        break
-        else:
-            print('File not exists.')
+        sub_thread = threading.Thread(target=download_file, args=(client_socket, ip_port))
+        # download_file(client_socket, ip_port)
+        sub_thread.start()
         client_socket.close()
     server_socket.close()
 
