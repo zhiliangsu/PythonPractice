@@ -1,6 +1,7 @@
 learning_env/
 __pycache__/
 *.sqlite3
+desktop.ini
 # 002_alien_invasion_v1/__pycache__/
 # 003_alien_invasion_v2/__pycache__/
 # 004_alien_invasion_v3/__pycache__/
