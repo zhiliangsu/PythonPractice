@@ -1,2 +1,2 @@
 # PythonPractice
-4Private practice.
+For python practice.
